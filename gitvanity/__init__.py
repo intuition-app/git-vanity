@@ -48,7 +48,10 @@ class Vanity():
             raise NotImplementedError("Output type must be one of print/html/markdown")
         self.output_dir = os.path.abspath(output_dir)
         self.output_type = output_type
-        os.makedirs(output_dir, exist_ok=True)
+        try:
+            os.makedirs(output_dir)
+        except OSError:
+            pass
         self.metrics_list = []
         self.limit = limit
 
@@ -63,7 +66,7 @@ class Vanity():
         output_dir = os.path.dirname(output_file_abs)
         try:
             os.makedirs(output_dir)
-        except FileExistsError:
+        except OSError:
             pass
         template = self.load_template(template_name)
         context['repo_name'] = self.repo_name
@@ -241,6 +244,7 @@ class Vanity():
         for index, commit in enumerate(repo.iter_commits()):
             short_sha = commit.hexsha[:7]
             sys.stdout.write("Analyzing commit %s. Processed %s commits so far.\r" % (short_sha, index))
+            sys.stdout.flush()
 
             is_merge = len(commit.parents) > 1
             is_bugfix = self.is_fix(commit)

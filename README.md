@@ -42,7 +42,7 @@ HTML output for the "Most Commits" leaderboard for the [facebook/react](https://
 
 # Installation
 
-GitVanity requires `python3`.
+GitVanity should work with python 2 or 3.
 
 ```bash
 pip install git-vanity
