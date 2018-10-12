@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='git-vanity',
-    version='0.2',
+    version='0.3',
     description='vanity leaderboard for git',
     url='http://github.com/intuition-app/frontend',
     author='Brian Brunner',

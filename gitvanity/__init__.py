@@ -115,7 +115,11 @@ class Vanity():
                 'limit': self.limit
             })
             print("HTML files containing vanity leaderboards saved to %s" % self.output_dir)
-            response = input('Would you like to view your metrics now? [y/n]: ')
+            query = 'Would you like to view your metrics now? [y/n]: '
+            if (sys.version_info > (3, 0)):
+                response = input(query)
+            else:
+                response = raw_input(query)
             if response.lower()[0] == 'y':
                 webbrowser.open('file://%s' % filepath)
 
