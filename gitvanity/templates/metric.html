@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} - {{ repo_name }}{% endblock %}
+{% block content %}
+  <div class='logo'></div>
+  <div class='title'>
+    {{ title }}
+  </div>
+  <div class='detail'>
+    {{ description }}
+  </div>
+  <table class='leaderboard' cellSpacing=0 cellPadding=0 border=0>
+    <thead>
+      <tr class='leaderboard-head'>
+        {% for header in headers %}
+          <th>{{ header }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data[:limit] %}
+        <tr class='leaderboard-row'>
+          {% for item in row %}
+            {% if item is number %}
+              <td class='number'>{{ item }}</td>
+            {% endif %}
+            {% if item is string %}
+              <td class='string'>{{ item }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if data|length > limit %}
+    <div class='cut'>{{ data|length - limit }} Result{% if data|length != 1 %}s{% endif%} Hidden</div>
+  {% endif %}
+{% endblock %}

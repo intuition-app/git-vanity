@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ repo_name }}{% endblock %}
+{% block content %}
+  <div class='logo'></div>
+  <div class='title'>
+    Vanity Leaderboards For {{ repo_name }}
+  </div>
+  <div class='detail'>
+    Last Updated At {{ updated_at }}
+  </div>
+  <div class='metrics-list'>
+    {% for metric in metrics %}
+      <div class='metric-row'>
+        <a href='{{ metric.link }}/index.html' class='metric-info'>
+          <div class='metric-name'>{{ metric.name }}</div>
+          <div class='metric-description'>{{ metric.description }}</div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

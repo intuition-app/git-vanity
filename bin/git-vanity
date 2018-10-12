@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import click
+
+from gitvanity import Vanity
+
+@click.command()
+@click.option('--output-type', default='print', help='One of print/markdown/html')
+@click.option('--output-dir', default='./vanity', help='If type is markdown or html, where to write output')
+@click.option('--limit', type=int, default=100, help='Max number of results to show per metric')
+def run_vanity(output_type, output_dir, limit):
+    vanity = Vanity(output_type=output_type, output_dir=output_dir, limit=limit)
+    vanity.run()
+
+if __name__ == "__main__":
+    run_vanity()

@@ -1,0 +1,1 @@
+include gitvanity/*.csv gitvanity/templates/*.html
