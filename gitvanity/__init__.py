@@ -304,11 +304,14 @@ class Vanity():
         with ProgressBar(num_files) as update:
             for index, filepath in enumerate(git_files):
                 update(index)
-                for commit, lines in repo.blame('HEAD', filepath):
-                    author_name = commit.author.name
-                    authors[author_name]['num_lines_total'] += len(lines)
-                    for line in lines:
-                        authors[author_name]['num_chars_total'] += len(line.strip())
+                try:
+                    for commit, lines in repo.blame('HEAD', filepath):
+                        author_name = commit.author.name
+                        authors[author_name]['num_lines_total'] += len(lines)
+                        for line in lines:
+                            authors[author_name]['num_chars_total'] += len(line.strip())
+                except git.exc.CommandError:
+                    continue
 
         authors_list = []
         for name, info in authors.items():
